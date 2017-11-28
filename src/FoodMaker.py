@@ -1,7 +1,7 @@
-import Person
+from Person import Person
 
 
-class FoodMaker(Person.Person):
+class FoodMaker(Person):
 
     def make_food(self):
         pass
