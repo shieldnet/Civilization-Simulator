@@ -4,9 +4,12 @@ from Person import Person
 class FoodMaker(Person):
 
     def __init__(self, has_tool):
-        self.master_pop = has_tool
-        self.normal_pop = self.population - self.master_pop
+        self._has_tool = has_tool
 
     def make_food(self):
-        self.tool += (self.master_pop * 0.8) + (self.normal_pop * 0.5)
+        self._tool += (self._has_tool * 0.8) + ((self._population - self._has_tool) * 0.5)
+
+    def food_pop(self):
+        print("Food Maker has tool : " + str(self._has_tool))
+        print("Food Maker no tool : " + str(self._population - self._has_tool))
 

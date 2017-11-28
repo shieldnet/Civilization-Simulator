@@ -4,8 +4,11 @@ from Person import Person
 class ToolMaker(Person):
 
     def __init__(self, has_tool):
-        self.master_pop = has_tool
-        self.normal_pop = self.population - self.master_pop
+        self._has_tool = has_tool
 
     def make_tool(self):
-        self.tool += (self.master_pop * 0.8) + (self.normal_pop * 0.5)
+        self._tool += (self._has_tool * 0.8) + ((self._population-self._has_tool) * 0.5)
+
+    def tool_pop(self):
+        print("Tool Maker has tool : " + str(self._has_tool))
+        print("Tool Maker no tool : " + str(self._population - self._has_tool))
