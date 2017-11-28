@@ -2,7 +2,6 @@ from Person import Person
 
 
 class ToolMaker(Person):
-
     def __init__(self, has_tool):
         self._has_tool = has_tool
 

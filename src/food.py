@@ -2,6 +2,7 @@
 
 import resource
 
+
 class Food(resource.Resource):
     def __init__(self, num):
         self.quantity = num
