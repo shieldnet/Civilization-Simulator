@@ -42,9 +42,9 @@ class Civilization:
         self._wood = Wood(0)
         
         # Person Object Lists
-        self._tool_maker = ToolMaker("ToolMaker")
-        self._food_maker = FoodMaker("FoodMaker")
-        self._water_maker = WaterMaker("WaterMaker")
+        self._tool_maker = ToolMaker(has_tool=0, _tool=None)
+        self._food_maker = FoodMaker(has_tool=0, _food=self._food)
+        self._water_maker = WaterMaker(has_tool=0, _water_obj=self._water)
         
         # Communication Object
     
@@ -57,7 +57,18 @@ class Civilization:
                     _table[r][c] = num
     
     def rsc_produce(self):
-        pass
+        self._food_maker.make_food()
+        self._water_maker.make_water()
+        
+    def rsc_comsume(self):
+        # Consume Foods
+        self._food_maker.consume_food()
+        self._water_maker.consume_food()
+        
+        # Consume Water
+        self._food_maker.consume_water()
+        self._water_maker.consume_water()
+    
     
     def exchange_rsc(self):
         pass
@@ -69,9 +80,13 @@ class Civilization:
         pass
     
     def set_rsc_importance_(self, kind_of_rsc, quantity):
-        pass
+        if self.kind_of_rsc < 100:
+            pass
         # Importance of each Resource
         # kind_of_rsc
+        
+    def set_first_info:
+        pass
 
     
 a = Civilization()
