@@ -1,8 +1,9 @@
 # water.py
 
 import resource
+from resource import Resource
 
-class Water(resource.Resource):
+class Water(Resource):
     def __init__(self, num):
         self.quantity = num
 
@@ -12,13 +13,14 @@ class Water(resource.Resource):
     def getquantity(self):
         return self.quantity
 
-    def consume(self, num):
-        self.quantity -= num
+    def increment(self):
+        self.quantity += self.CONST_DIFF
 
-"""
-r1 = Water(500)
-print(r1.CONST_TO_SURVIVE)
-print(r1.getquantity())
-r1.consume(100)
-print(r1.getquantity())
-"""
+    def increments(self, num):
+        self.quantity += num
+
+    def decrement(self):
+        self.quantity -= self.CONST_DIFF
+
+    def decrements(self, num):
+        self.quantity -= num

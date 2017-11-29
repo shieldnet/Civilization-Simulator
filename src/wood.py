@@ -1,8 +1,9 @@
 # wood.py
 
 import resource
+from resource import Resource
 
-class Wood(resource.Resource):
+class Wood(Resource):
     def __init__(self, num):
         self.quantity = num
 
@@ -12,5 +13,14 @@ class Wood(resource.Resource):
     def getquantity(self):
         return self.quantity
 
-    def consume(self, num):
+    def increment(self):
+        self.quantity += self.CONST_DIFF
+
+    def increments(self, num):
+        self.quantity += num
+
+    def decrement(self):
+        self.quantity -= self.CONST_DIFF
+
+    def decrements(self, num):
         self.quantity -= num

@@ -1,9 +1,9 @@
 # food.py
 
 import resource
+from resource import Resource
 
-
-class Food(resource.Resource):
+class Food(Resource):
     def __init__(self, num):
         self.quantity = num
 
@@ -13,5 +13,14 @@ class Food(resource.Resource):
     def getquantity(self):
         return self.quantity
 
-    def consume(self, num):
+    def increment(self):
+        self.quantity += self.CONST_DIFF
+
+    def increments(self, num):
+        self.quantity += num
+
+    def decrement(self):
+        self.quantity -= self.CONST_DIFF
+
+    def decrements(self, num):
         self.quantity -= num
