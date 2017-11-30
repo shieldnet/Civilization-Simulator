@@ -2,6 +2,7 @@
 Project4 OOP Team project
 
 * How to install to use server.py
+ 유
 https://pypi.python.org/pypi/python-firebase/1.2
-* sudo pip install requests==1.1.0
+* sudo pip install requests
 * sudo pip install python-firebase
