@@ -42,9 +42,10 @@ class Civilization:
         self._wood = Wood(0)
         
         # Person Object Lists
+        # 여기 수정중
         self._tool_maker = ToolMaker(has_tool=0, _tool=None)
         self._food_maker = FoodMaker(has_tool=0, _food=self._food)
-        self._water_maker = WaterMaker(has_tool=0, _water_obj=self._water)
+        self._water_maker = WaterMaker(has_tool=0, _water_obj=self._water, _population=100)
         
         # Communication Object
     
@@ -85,7 +86,7 @@ class Civilization:
         # Importance of each Resource
         # kind_of_rsc
         
-    def set_first_info:
+    def set_first_info(self):
         pass
 
     
@@ -93,3 +94,10 @@ a = Civilization()
 
 print(a._my_exchange_table)
 print(a._other_exchange_table)
+
+print(a._food.getquantity())
+a._food_maker._population=100
+a._food_maker.make_food()
+print(a._food.getquantity())
+a.rsc_comsume()
+print(a._food.getquantity())
