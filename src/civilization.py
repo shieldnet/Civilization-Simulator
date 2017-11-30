@@ -1,5 +1,5 @@
 import sys
-import json
+import random
 
 # Import Person Class
 from FoodMaker import FoodMaker
@@ -11,12 +11,15 @@ from food import Food
 from water import Water
 from wood import Wood
 
+# Import Firebase Class
+from firebase import firebase
+
 
 # Civilization Class
 class Civilization:
     # const
     _NUMBER_OF_RSC = 2
-    
+
     def __init__(self):
         self._my_exchange_table = \
             [[0 for col in range(self._NUMBER_OF_RSC + 1)] for row in range(self._NUMBER_OF_RSC + 1)]
@@ -46,7 +49,21 @@ class Civilization:
         self._food_maker = FoodMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
         self._water_maker = WaterMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
         
-        # Communication Object
+        # Communication Data(Dictionary)
+        self._civil1_info_dic = {
+            'Civil1_People': self._total_population,
+            'Civil1_Food': self._food.getquantity(),
+            'Civil1_Water': self._water.getquantity(),
+            'Civil1_DegOfCivilized': self._degree_of_civilized,
+            'Civil1_Wood': self._wood.getquantity()
+        }
+        self._civil2_info_dic = {
+            'Civil2_NumPeople': 0,
+            'Civil2_Food': 0,
+            'Civil2_Water': 0,
+            'Civil2_DegOfCivilized': 0,
+            'Civil2_Wood': 0
+         }
         # Blank..?
     
     def _init_rsc_table(self, _table, num):
@@ -71,7 +88,6 @@ class Civilization:
         # Consume Water
         self._food_maker.consume_water()
         self._water_maker.consume_water()
-    
     
     #Exchange
     def exchange_rsc(self):
@@ -103,6 +119,28 @@ class Civilization:
         
     def set_first_info(self):
         pass
+    
+    # Civilization 1
+    def _civil1_save_data_in_dic(self):
+        self._civil1_info_dic = {
+            'Civil1_People': self._total_population,
+            'Civil1_Food': self._food.getquantity(),
+            'Civil1_Water': self._water.getquantity(),
+            'Civil1_DegOfCivilized': self._degree_of_civilized,
+            'Civil1_Wood': self._wood.getquantity()
+        }
+    
+    # Civilization 2
+    def _civil2_save_data_in_dic(self):
+        # Get the data from server
+        self._civil2_info_dic = {
+            'Civil2_People': 0,
+            'Civil2_Food': 0,
+            'Civil2_Water': 0,
+            'Civil2_DegOfCivilized': 0,
+            'Civil2_Wood': 0
+        }
+    
 
     
 a = Civilization()
