@@ -4,6 +4,7 @@ class Person:
         self._food = _food
         self._water = _water
         self._tool = _tool
+        self._name = "Person"
         self._population = _population
 
     # 자원소비
@@ -21,10 +22,14 @@ class Person:
     def get_pop(self):
         return self._population
 
-    def person_status(self):
-        print("총 인구수: ", self._population)
+    def print_pop(self):
+        print(" 인구수: ", self._population)
 
-
+    def status_check(self):
+        if self._water <= 0:
+            print("{0} has no water to drink!\n", format(self._name))
+        if self._food <= 0:
+            print("{0} has no food to eat!\n", format(self._name))
 
 
 
