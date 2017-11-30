@@ -1,6 +1,5 @@
 # water.py
 
-import resource
 from resource import Resource
 
 class Water(Resource):
@@ -21,6 +20,8 @@ class Water(Resource):
 
     def decrement(self):
         self.quantity -= self.CONST_DIFF
+        self.checkquantity()
 
     def decrements(self, num):
         self.quantity -= num
+        self.checkquantity()

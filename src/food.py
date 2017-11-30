@@ -1,6 +1,5 @@
 # food.py
 
-import resource
 from resource import Resource
 
 class Food(Resource):
@@ -21,6 +20,8 @@ class Food(Resource):
 
     def decrement(self):
         self.quantity -= self.CONST_DIFF
+        self.checkquantity()
 
     def decrements(self, num):
         self.quantity -= num
+        self.checkquantity()
