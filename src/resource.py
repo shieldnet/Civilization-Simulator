@@ -6,7 +6,10 @@ class Resource:
     CONST_DIFF = 3
     _importance = 0
     _is_lif_rsc = False
-
+    
+    def checkquantity(self):
+        pass
+    
     def setquantity(self, num):
         raise NotImplementedError
 
