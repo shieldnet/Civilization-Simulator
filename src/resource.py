@@ -1,17 +1,11 @@
 # resource.py
 
-from QuantityError import QuantityError
 
 class Resource:
     CONST_LIFE_RESOURCE = 2
     CONST_DIFF = 3
-
-    def checkquantity(self):
-        try:
-            if(self.quantity < 0):
-                raise QuantityError
-        except QuantityError:
-            self.quantity = 0
+    _importance = 0
+    _is_lif_rsc = False
 
     def setquantity(self, num):
         raise NotImplementedError
