@@ -3,15 +3,13 @@ import random
 
 # Import Person Class
 from FoodMaker import FoodMaker
-from ToolMaker import ToolMaker
 from WaterMaker import WaterMaker
 
 # Import Resource Class
 from food import Food
 from water import Water
-from wood import Wood
-
 # Import Firebase Class
+import DBManager
 from firebase import firebase
 
 
@@ -19,7 +17,7 @@ from firebase import firebase
 class Civilization:
     # const
     _NUMBER_OF_RSC = 2
-
+    
     def __init__(self):
         self._my_exchange_table = \
             [[0 for col in range(self._NUMBER_OF_RSC + 1)] for row in range(self._NUMBER_OF_RSC + 1)]
@@ -41,11 +39,9 @@ class Civilization:
         # Resource Object List
         self._food = Food(0)
         self._water = Water(0)
-        self._wood = Wood(0)
         
         # Person Object Lists
         # 여기 수정중
-        self._tool_maker = ToolMaker(has_tool=0, _tool=None)
         self._food_maker = FoodMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
         self._water_maker = WaterMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
         
@@ -55,16 +51,15 @@ class Civilization:
             'Civil1_Food': self._food.getquantity(),
             'Civil1_Water': self._water.getquantity(),
             'Civil1_DegOfCivilized': self._degree_of_civilized,
-            'Civil1_Wood': self._wood.getquantity()
         }
         self._civil2_info_dic = {
             'Civil2_NumPeople': 0,
             'Civil2_Food': 0,
             'Civil2_Water': 0,
             'Civil2_DegOfCivilized': 0,
-            'Civil2_Wood': 0
          }
-        # Blank..?
+        
+        self._db_manager = DBManager.DBManager(civil_dic1=self._civil1_info_dic, civil_dic2=self._civil2_info_dic)
     
     def _init_rsc_table(self, _table, num):
         for r in range(0, self._NUMBER_OF_RSC + 1):
