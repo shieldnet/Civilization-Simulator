@@ -2,9 +2,11 @@ from Person import Person
 
 
 class WaterMaker(Person):
-    def __init__(self, has_tool, _water_obj):
+    def __init__(self, has_tool, _food, _water, _population=0):
         self._has_tool = has_tool
-        self._water_obj = _water_obj
+        self._water_obj = _water
+        self._food_obj = _food
+        self._population = _population
 
     def make_water(self):
         _water_increase = (self._has_tool * 0.8) + ((self._population - self._has_tool) * 0.5)

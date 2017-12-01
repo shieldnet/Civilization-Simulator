@@ -5,6 +5,7 @@ from resource import Resource
 class Water(Resource):
     def __init__(self, num):
         self.quantity = num
+        self._is_lif_rsc = True
 
     def setquantity(self, num):
         self.quantity = num

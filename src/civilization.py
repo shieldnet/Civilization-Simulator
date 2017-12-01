@@ -1,15 +1,16 @@
 import sys
-import json
+import random
 
 # Import Person Class
 from FoodMaker import FoodMaker
-from ToolMaker import ToolMaker
 from WaterMaker import WaterMaker
 
 # Import Resource Class
 from food import Food
 from water import Water
-from wood import Wood
+# Import Firebase Class
+import DBManager
+from firebase import firebase
 
 
 # Civilization Class
@@ -29,7 +30,6 @@ class Civilization:
         self._total_population = 0
         self._total_tools = 0
         
-        
         # Initialize it
         self._init_rsc_table(self._my_exchange_table, -1)
         self._init_rsc_table(self._other_exchange_table, -1)
@@ -39,14 +39,27 @@ class Civilization:
         # Resource Object List
         self._food = Food(0)
         self._water = Water(0)
-        self._wood = Wood(0)
         
         # Person Object Lists
-        self._tool_maker = ToolMaker(has_tool=0, _tool=None)
-        self._food_maker = FoodMaker(has_tool=0, _food=self._food)
-        self._water_maker = WaterMaker(has_tool=0, _water_obj=self._water)
+        # 여기 수정중
+        self._food_maker = FoodMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
+        self._water_maker = WaterMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
         
-        # Communication Object
+        # Communication Data(Dictionary)
+        self._civil1_info_dic = {
+            'Civil1_People': self._total_population,
+            'Civil1_Food': self._food.getquantity(),
+            'Civil1_Water': self._water.getquantity(),
+            'Civil1_DegOfCivilized': self._degree_of_civilized,
+        }
+        self._civil2_info_dic = {
+            'Civil2_NumPeople': 0,
+            'Civil2_Food': 0,
+            'Civil2_Water': 0,
+            'Civil2_DegOfCivilized': 0,
+         }
+        
+        self._db_manager = DBManager.DBManager(civil_dic1=self._civil1_info_dic, civil_dic2=self._civil2_info_dic)
     
     def _init_rsc_table(self, _table, num):
         for r in range(0, self._NUMBER_OF_RSC + 1):
@@ -56,10 +69,12 @@ class Civilization:
                 else:
                     _table[r][c] = num
     
+    #Produce Resource
     def rsc_produce(self):
         self._food_maker.make_food()
         self._water_maker.make_water()
-        
+     
+    #Consume Resource
     def rsc_comsume(self):
         # Consume Foods
         self._food_maker.consume_food()
@@ -69,27 +84,67 @@ class Civilization:
         self._food_maker.consume_water()
         self._water_maker.consume_water()
     
-    
+    #Exchange
     def exchange_rsc(self):
         pass
     
+    #ratio of resource produce
     def calc_rsc_produce(self):
         pass
     
+    #amount of person movement
     def person_movement(self):
         pass
     
-    def set_rsc_importance_(self, kind_of_rsc, quantity):
-        if self.kind_of_rsc < 100:
-            pass
-        # Importance of each Resource
-        # kind_of_rsc
+    def set_rsc_importance(self):
+        self._set_importance(self._food)
+        self._set_importance(self._water)
+    
+    def _set_importance(self, kind_of_rsc):
+        # Importance of each Resource, Life resource amend
+        importance_limit = self._total_population*0.5
         
-    def set_first_info:
+        if self.kind_of_rsc._is_life_rsc is True:
+            importance_limit *= kind_of_rsc.CONST_LIFE_RESOURCE
+            
+        if self.kind_of_rsc.get_quantity() < importance_limit:
+            kind_of_rsc._importance += 10
+        else:
+            kind_of_rsc._importance = 0
+        
+    def set_first_info(self):
         pass
+    
+    # Civilization 1
+    def _civil1_save_data_in_dic(self):
+        self._civil1_info_dic = {
+            'Civil1_People': self._total_population,
+            'Civil1_Food': self._food.getquantity(),
+            'Civil1_Water': self._water.getquantity(),
+            'Civil1_DegOfCivilized': self._degree_of_civilized,
+            'Civil1_Wood': self._wood.getquantity()
+        }
+    
+    # Civilization 2
+    def _civil2_save_data_in_dic(self):
+        # Get the data from server
+        self._civil2_info_dic = {
+            'Civil2_People': 0,
+            'Civil2_Food': 0,
+            'Civil2_Water': 0,
+            'Civil2_DegOfCivilized': 0,
+            'Civil2_Wood': 0
+        }
+    
 
     
 a = Civilization()
 
 print(a._my_exchange_table)
 print(a._other_exchange_table)
+
+print(a._food.getquantity())
+a._food_maker.make_food()
+print(a._food.getquantity())
+a.rsc_comsume()
+print(a._food.getquantity())

@@ -15,15 +15,8 @@ print(vil2)
 # TODO
 
 #해당 키에 되는거 값 Update , Post는 하지 마세요
-update_vil1 = firebase.patch('/villiage1', {'BuyCost' : 3})
+update_vil1 = firebase.patch('/villiage1', {'BuyCost' : 6123})
 update_vil2 = firebase.patch('/villiage2', {'NumPeople' : 5, 'Production' : 2})
 
 print(update_vil1)
 print(update_vil2)
-
-
-
-
-
-
-

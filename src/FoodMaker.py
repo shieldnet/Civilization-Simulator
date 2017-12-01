@@ -3,13 +3,15 @@ from Person import Person
 
 class FoodMaker(Person):
     # ( number of has_tool, food object )
-    def __init__(self, has_tool, _food):
+    def __init__(self, has_tool, _food, _water, _population=0):
         self._has_tool = has_tool
-        self._food = _food
+        self._food_obj = _food
+        self._water_obj = _water
+        self._population = _population
 
     def make_food(self):
         _d_food = (self._has_tool * 0.8) + ((self._population - self._has_tool) * 0.5)
-        self._food.increments(_d_food)
+        self._food_obj.increments(_d_food)
 
     def food_pop(self):
         print("Food Maker has tool : " + str(self._has_tool))
