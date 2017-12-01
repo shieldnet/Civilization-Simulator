@@ -7,7 +7,7 @@ https://pypi.python.org/pypi/python-firebase/1.2
 * sudo pip install requests
 * sudo pip install python-firebase
 
-* How to install plotly (to use front.py)
+How to install plotly (to use front.py)
 
 * pip install dash==0.19.0  # The core dash backend
 * pip install dash-renderer==0.11.1  # The dash front-end
