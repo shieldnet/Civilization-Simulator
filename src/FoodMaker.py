@@ -11,7 +11,7 @@ class FoodMaker(Person):
         self._name = "Food Maker"
 
     def make_food(self):
-        _d_food = self._population * 1.2
+        _d_food = self._population * 2.4
         self._food_obj.increments(_d_food)
 
     def food_pop(self):

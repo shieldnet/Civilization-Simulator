@@ -11,6 +11,9 @@ if __name__ == '__main__':
         
         civil1.set_first_info(2)
         
+        
+        civil1.person_movement()
+        
         civil1.set_rsc_importance()
         civil1.change_ratio_of_maker()
         

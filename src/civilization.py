@@ -1,5 +1,6 @@
 import sys
 import random
+import math
 
 # Import Person Class
 from FoodMaker import FoodMaker
@@ -48,7 +49,7 @@ class Civilization:
         
         # Communication Data(Dictionary)
         self._civil1_info_dic = {
-            'Civil1_People': self._total_population,
+            'Civil1_NumPeople': self._total_population,
             'Civil1_Food': self._food.getquantity(),
             'Civil1_Water': self._water.getquantity(),
             'Civil1_DegOfCivilized': self._degree_of_civilized,
@@ -87,8 +88,9 @@ class Civilization:
     
     # Exchange
     def exchange_rsc(self):
-        pass
-    
+        print("Exchange Resources!!")
+        
+        
     # Check if is insufficient
     def is_rsc_insufficient(self, kind_of_food):
         if kind_of_food.getquantity() < self._total_population * 2:
@@ -99,18 +101,26 @@ class Civilization:
     def get_db_manager(self):
         return self._db_manager
     
-    # ratio of resource produce
-    def calc_rsc_produce(self):
-        pass
-    
     # amount of person movement
     def person_movement(self):
-        pass
+        
+        civil1_pop = self._civil1_info_dic['Civil1_NumPeople']
+        civil2_pop = self._civil2_info_dic['Civil2_NumPeople']
+        
+        d_p = 10
+        
+        if civil1_pop < civil2_pop:
+            d_p *= -1
+        else:
+            d_p *= 1
+    
+        self._civil1_info_dic['Civil1_NumPeople'] += d_p
+        self._civil2_info_dic['Civil2_NumPeople'] -= d_p
+        
     
     def change_ratio_of_maker(self):
         sum_of_importance = self._food._importance + self._water._importance
         ratio_of_foodmaker = self._food._importance / sum_of_importance
-        ratio_of_watermaker = self._food._importance / sum_of_importance
         self._food_maker._population = int(self._total_population * ratio_of_foodmaker)
         self._water_maker._population = self._total_population - self._food_maker._population
         
@@ -126,7 +136,7 @@ class Civilization:
             importance_limit *= kind_of_rsc.CONST_LIFE_RESOURCE
             
         if kind_of_rsc.getquantity() < importance_limit:
-            kind_of_rsc._importance += 50
+            kind_of_rsc._importance += abs(self._food.getquantity()-self._water.getquantity())/2
         else:
             kind_of_rsc._importance = 100
         
