@@ -8,15 +8,16 @@ from WaterMaker import WaterMaker
 # Import Resource Class
 from food import Food
 from water import Water
+
 # Import Firebase Class
 import DBManager
 from firebase import firebase
-
 
 # Civilization Class
 class Civilization:
     # const
     _NUMBER_OF_RSC = 2
+    CIVILNUM = 1
     
     def __init__(self):
         self._my_exchange_table = \
@@ -84,9 +85,16 @@ class Civilization:
         self._food_maker.consume_water()
         self._water_maker.consume_water()
     
-    #Exchange
+    # Exchange
     def exchange_rsc(self):
         pass
+    
+    # Check if is insufficient
+    def is_rsc_insufficient(self, kind_of_food):
+        if kind_of_food.getquantity() < self._total_population * 0.5:
+            return True
+        else:
+            return False
     
     #ratio of resource produce
     def calc_rsc_produce(self):
@@ -112,7 +120,7 @@ class Civilization:
         else:
             kind_of_rsc._importance = 0
         
-    def set_first_info(self):
+    def set_first_info(self, num_population, num_food, num_water, deg_civilized):
         pass
     
     # Civilization 1
@@ -122,18 +130,16 @@ class Civilization:
             'Civil1_Food': self._food.getquantity(),
             'Civil1_Water': self._water.getquantity(),
             'Civil1_DegOfCivilized': self._degree_of_civilized,
-            'Civil1_Wood': self._wood.getquantity()
         }
     
     # Civilization 2
     def _civil2_save_data_in_dic(self):
         # Get the data from server
         self._civil2_info_dic = {
-            'Civil2_People': 0,
+            'Civil2_NumPeople': 0,
             'Civil2_Food': 0,
             'Civil2_Water': 0,
             'Civil2_DegOfCivilized': 0,
-            'Civil2_Wood': 0
         }
     
 
