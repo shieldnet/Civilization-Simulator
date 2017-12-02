@@ -43,8 +43,8 @@ class Civilization:
         
         # Person Object Lists
         # 여기 수정중
-        self._food_maker = FoodMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
-        self._water_maker = WaterMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
+        self._food_maker = FoodMaker(has_tool=0, _food=self._food, _water=self._water, _population=500)
+        self._water_maker = WaterMaker(has_tool=0, _food=self._food, _water=self._water, _population=500)
         
         # Communication Data(Dictionary)
         self._civil1_info_dic = {
@@ -107,6 +107,13 @@ class Civilization:
     def person_movement(self):
         pass
     
+    def change_ratio_of_maker(self):
+        sum_of_importance = self._food._importance + self._water._importance
+        ratio_of_foodmaker = self._food._importance / sum_of_importance
+        ratio_of_watermaker = self._food._importance / sum_of_importance
+        self._food_maker._population = int(self._total_population * ratio_of_foodmaker)
+        self._water_maker._population = int(self._total_population * ratio_of_watermaker)
+        
     def set_rsc_importance(self):
         self._set_importance(self._food)
         self._set_importance(self._water)
@@ -115,13 +122,13 @@ class Civilization:
         # Importance of each Resource, Life resource amend
         importance_limit = self._total_population*0.5
         
-        if self.kind_of_rsc._is_life_rsc is True:
+        if self.kind_of_rsc.is_life_rsc() is True:
             importance_limit *= kind_of_rsc.CONST_LIFE_RESOURCE
             
         if self.kind_of_rsc.get_quantity() < importance_limit:
             kind_of_rsc._importance += 10
         else:
-            kind_of_rsc._importance = 0
+            kind_of_rsc._importance = 100
         
     def set_first_info(self, civil_num):
         name_str = 'Civil'+str(civil_num)+'_'
@@ -169,3 +176,4 @@ class Civilization:
             return self._civil1_info_dic
         else:
             return self._civil2_info_dic
+        

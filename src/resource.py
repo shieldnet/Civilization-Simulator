@@ -27,3 +27,6 @@ class Resource:
 
     def decrements(self, num):
         raise NotImplementedError
+    
+    def is_life_rsc(self):
+        return self._is_lif_rsc
