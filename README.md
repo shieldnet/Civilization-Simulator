@@ -14,6 +14,8 @@ How to install plotly (to use front.py)
 * `pip install dash-html-components==0.8.0`  # HTML components
 * `pip install dash-core-components==0.13.0-rc4` # Supercharged components
 * `pip install plotly --upgrade`  # Plotly graphing library used in examples
+* `pip install pandas` # python data tool
+
 
 
 `For bash User`
@@ -25,4 +27,5 @@ pip install dash-renderer==0.11.1
 pip install dash-html-components==0.8.0
 pip install dash-core-components==0.13.0-rc4
 pip install plotly --upgrade
+pip install pandas
 ```
