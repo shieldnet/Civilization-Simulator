@@ -10,7 +10,7 @@ class WaterMaker(Person):
         self._name = "Water Maker"
 
     def make_water(self):
-        _water_increase = (self._has_tool * 1.1) + ((self._population - self._has_tool) * 0.8)
+        _water_increase = self._population * 1.1
         self._water_obj.increments(_water_increase)
 
     def water_pop(self):

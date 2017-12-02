@@ -43,8 +43,8 @@ class Civilization:
         
         # Person Object Lists
         # 여기 수정중
-        self._food_maker = FoodMaker(has_tool=0, _food=self._food, _water=self._water, _population=500)
-        self._water_maker = WaterMaker(has_tool=0, _food=self._food, _water=self._water, _population=500)
+        self._food_maker = FoodMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
+        self._water_maker = WaterMaker(has_tool=0, _food=self._food, _water=self._water, _population=0)
         
         # Communication Data(Dictionary)
         self._civil1_info_dic = {
@@ -91,7 +91,7 @@ class Civilization:
     
     # Check if is insufficient
     def is_rsc_insufficient(self, kind_of_food):
-        if kind_of_food.getquantity() < self._total_population * 0.5:
+        if kind_of_food.getquantity() < self._total_population * 2:
             return True
         else:
             return False
@@ -112,7 +112,7 @@ class Civilization:
         ratio_of_foodmaker = self._food._importance / sum_of_importance
         ratio_of_watermaker = self._food._importance / sum_of_importance
         self._food_maker._population = int(self._total_population * ratio_of_foodmaker)
-        self._water_maker._population = int(self._total_population * ratio_of_watermaker)
+        self._water_maker._population = self._total_population - self._food_maker._population
         
     def set_rsc_importance(self):
         self._set_importance(self._food)
@@ -120,23 +120,29 @@ class Civilization:
     
     def _set_importance(self, kind_of_rsc):
         # Importance of each Resource, Life resource amend
-        importance_limit = self._total_population*0.5
+        importance_limit = self._total_population*2
         
-        if self.kind_of_rsc.is_life_rsc() is True:
+        if kind_of_rsc.is_life_rsc() is True:
             importance_limit *= kind_of_rsc.CONST_LIFE_RESOURCE
             
-        if self.kind_of_rsc.get_quantity() < importance_limit:
-            kind_of_rsc._importance += 10
+        if kind_of_rsc.getquantity() < importance_limit:
+            kind_of_rsc._importance += 50
         else:
             kind_of_rsc._importance = 100
         
     def set_first_info(self, civil_num):
         name_str = 'Civil'+str(civil_num)+'_'
         _civil_info_dic = self.get_db_manager().download_db(civil_num)
-        self._total_population = _civil_info_dic[name_str+'NumPeople']
-        self._food.setquantity(_civil_info_dic[name_str+'Food'])
-        self._water.setquantity(_civil_info_dic[name_str+'Water'])
-        self._degree_of_civilized = _civil_info_dic[name_str+'DegOfCivilized']
+        
+        # IF CivilNumber different from database, not update local
+        if civil_num is not self.CIVILNUM:
+            pass
+        else:
+            self._total_population = _civil_info_dic[name_str+'NumPeople']
+            self._food.setquantity(_civil_info_dic[name_str+'Food'])
+            self._water.setquantity(_civil_info_dic[name_str+'Water'])
+            self._degree_of_civilized = _civil_info_dic[name_str+'DegOfCivilized']
+        
         if civil_num is 1:
             self._civil1_info_dic = _civil_info_dic
         else:

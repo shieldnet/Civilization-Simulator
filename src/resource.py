@@ -3,7 +3,7 @@
 class Resource:
     CONST_LIFE_RESOURCE = 2
     CONST_DIFF = 3
-    _importance = 0
+    _importance = 100
     _is_lif_rsc = False
     
     def checkquantity(self):
