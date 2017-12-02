@@ -3,7 +3,7 @@ from firebase import firebase
 firebase = firebase.FirebaseApplication('https://villiagesimulator.firebaseio.com', None)
 
 civil1_dic = {
-            'Civil1_NumPeople': 500,
+            'Civil1_NumPeople': 400,
             'Civil1_Food': 10000,
             'Civil1_Water': 10000,
             'Civil1_DegOfCivilized': 1000,
