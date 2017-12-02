@@ -21,11 +21,14 @@ class Person:
     def get_pop(self):
         return self._population
 
-    def person_status(self):
-        print("총 인구수: ", self._population)
+    def print_pop(self):
+        print(" {0} 인구수: " + str(self._population), format(self._name))
 
-
-
+    def status_check(self):
+        if self._water <= 0:
+            print("{0} has no water to drink!\n", format(self._name))
+        if self._food <= 0:
+            print("{0} has no food to eat!\n", format(self._name))
 
 
 
