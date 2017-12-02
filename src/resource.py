@@ -1,6 +1,5 @@
 # resource.py
 
-
 class Resource:
     CONST_LIFE_RESOURCE = 2
     CONST_DIFF = 3
@@ -8,7 +7,8 @@ class Resource:
     _is_lif_rsc = False
     
     def checkquantity(self):
-        pass
+        if(self.quantity < 0):
+            self.quantity = 0
     
     def setquantity(self, num):
         raise NotImplementedError
