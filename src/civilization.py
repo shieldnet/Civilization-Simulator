@@ -16,7 +16,7 @@ from firebase import firebase
 # Civilization Class
 class Civilization:
     # const
-    _NUMBER_OF_RSC = 2
+    _NUMBER_OF_RSC = 1
     CIVILNUM = 1
     
     def __init__(self):
@@ -25,7 +25,7 @@ class Civilization:
         self._other_exchange_table = \
             [[0 for col in range(self._NUMBER_OF_RSC + 1)] for row in range(self._NUMBER_OF_RSC + 1)]
         
-        self._rsc_enum = {'food': 0, 'water': 1, 'wood': 2}
+        self._rsc_enum = {'food': 0, 'water': 1}
         
         # Information of Civilization
         self._total_population = 0
@@ -70,12 +70,12 @@ class Civilization:
                 else:
                     _table[r][c] = num
     
-    #Produce Resource
+    # Produce Resource
     def rsc_produce(self):
         self._food_maker.make_food()
         self._water_maker.make_water()
      
-    #Consume Resource
+    # Consume Resource
     def rsc_comsume(self):
         # Consume Foods
         self._food_maker.consume_food()
@@ -95,12 +95,15 @@ class Civilization:
             return True
         else:
             return False
+        
+    def get_db_manager(self):
+        return self._db_manager
     
-    #ratio of resource produce
+    # ratio of resource produce
     def calc_rsc_produce(self):
         pass
     
-    #amount of person movement
+    # amount of person movement
     def person_movement(self):
         pass
     
@@ -120,13 +123,22 @@ class Civilization:
         else:
             kind_of_rsc._importance = 0
         
-    def set_first_info(self, num_population, num_food, num_water, deg_civilized):
-        pass
+    def set_first_info(self, civil_num):
+        name_str = 'Civil'+str(civil_num)+'_'
+        _civil_info_dic = self.get_db_manager().download_db(civil_num)
+        self._total_population = _civil_info_dic[name_str+'NumPeople']
+        self._food.setquantity(_civil_info_dic[name_str+'Food'])
+        self._water.setquantity(_civil_info_dic[name_str+'Water'])
+        self._degree_of_civilized = _civil_info_dic[name_str+'DegOfCivilized']
+        if civil_num is 1:
+            self._civil1_info_dic = _civil_info_dic
+        else:
+            self._civil2_info_dic = _civil_info_dic
     
     # Civilization 1
     def _civil1_save_data_in_dic(self):
         self._civil1_info_dic = {
-            'Civil1_People': self._total_population,
+            'Civil1_NumPeople': self._total_population,
             'Civil1_Food': self._food.getquantity(),
             'Civil1_Water': self._water.getquantity(),
             'Civil1_DegOfCivilized': self._degree_of_civilized,
@@ -141,16 +153,19 @@ class Civilization:
             'Civil2_Water': 0,
             'Civil2_DegOfCivilized': 0,
         }
+        
+    def update_info_dic(self, num_of_civil):
+        if num_of_civil is 1:
+            self._civil1_save_data_in_dic()
+        else:
+            self._civil2_save_data_in_dic()
     
-
-    
-a = Civilization()
-
-print(a._my_exchange_table)
-print(a._other_exchange_table)
-
-print(a._food.getquantity())
-a._food_maker.make_food()
-print(a._food.getquantity())
-a.rsc_comsume()
-print(a._food.getquantity())
+    def print_rsc_quantity(self):
+        print('Food :' + str(self._food.getquantity()))
+        print('Water:' + str(self._water.getquantity()))
+        
+    def get_info_dic(self, civil_num):
+        if civil_num is 1:
+            return self._civil1_info_dic
+        else:
+            return self._civil2_info_dic

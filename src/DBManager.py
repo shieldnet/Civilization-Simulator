@@ -9,15 +9,17 @@ class DBManager:
         self._civil_dic2 = civil_dic2
     
     # Initialize DB from server
-    def first_get_db(self, ref_dic1, ref_dic2):
-        ref_dic1 = firebase.get('/Civilization1', None)
-        ref_dic2 = firebase.get('/Civilization2', None)
+    def first_get_db(self, civil_num):
+        if civil_num is 1:
+            return firebase.get('/Civilization1', None)
+        else:
+            return firebase.get('/Civilization2', None)
     
     # Update Databse to server
-    def upload_db(self, ref_dic):
-        firebase.patch('/villiage1', ref_dic)
+    def upload_db(self, ref_dic, num_of_civil):
+        firebase.patch('/Civilization' + str(num_of_civil), ref_dic)
         
-    def download_db(self, ref_dic, num_of_civil):
-        firebase.get('/Civilization' + str(num_of_civil), None)
+    def download_db(self, num_of_civil):
+        return firebase.get('/Civilization' + str(num_of_civil), None)
 
     
