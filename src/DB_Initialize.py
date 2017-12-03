@@ -4,15 +4,15 @@ firebase = firebase.FirebaseApplication('https://villiagesimulator.firebaseio.co
 
 civil1_dic = {
             'Civil1_NumPeople': 500,
-            'Civil1_Food': 2500,
-            'Civil1_Water': 12500,
+            'Civil1_Food': 8000,
+            'Civil1_Water': 5000,
             'Civil1_DegOfCivilized': 1000,
         }
 
 civil2_dic = {
             'Civil2_NumPeople': 500,
-            'Civil2_Food': 2000,
-            'Civil2_Water': 2000,
+            'Civil2_Food': 5000,
+            'Civil2_Water': 7000,
             'Civil2_DegOfCivilized': 1000,
         }
 
