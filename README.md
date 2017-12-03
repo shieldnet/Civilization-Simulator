@@ -29,3 +29,14 @@ pip install dash-core-components==0.13.0-rc4
 pip install plotly --upgrade
 pip install pandas
 ```
+`For Linux User`
+```bash
+sudo pip3 install requests
+sudo pip3 install python-firebase
+sudo pip3 install dash==0.19.0
+sudo pip3 install dash-renderer==0.11.1
+sudo pip3 install dash-html-components==0.8.0
+sudo pip3 install dash-core-components==0.13.0-rc4
+sudo pip3 install plotly --upgrade
+sudo pip3 install pandas
+```
