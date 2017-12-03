@@ -192,4 +192,3 @@ class Civilization:
             return self._civil1_info_dic
         else:
             return self._civil2_info_dic
-        
