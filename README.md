@@ -8,35 +8,37 @@ https://pypi.python.org/pypi/python-firebase/1.2
 * `sudo pip install python-firebase`
 
 How to install plotly (to use front.py)
-
-* `pip install dash==0.19.0`* # The core dash backend
-* `pip install dash-renderer==0.11.1`  # The dash front-end
-* `pip install dash-html-components==0.8.0`  # HTML components
-* `pip install dash-core-components==0.13.0-rc4` # Supercharged components
-* `pip install plotly --upgrade`  # Plotly graphing library used in examples
-* `pip install pandas` # python data tool
-
-
+* `pip install plotly==2.0.10 
+* `pip install pandas==0.19.2
+* `pip install pandas-datareader==0.3.0.post0
+* `pip install dash==0.17.4
+* `pip install dash-renderer==0.7.2
+* `pip install dash-html-components==0.6.0
+* `pip install dash-core-components==0.5.0
+* `pip install gunicorn==19.7.1
+* `pip install flask==0.12
 
 `For bash User`
 ```bash
-pip install requests
-pip install python-firebase
-pip install dash==0.19.0
-pip install dash-renderer==0.11.1
-pip install dash-html-components==0.8.0
-pip install dash-core-components==0.13.0-rc4
-pip install plotly --upgrade
-pip install pandas
+pip install plotly==2.0.10
+pip install pandas==0.19.2
+pip install pandas-datareader==0.3.0.post0
+pip install dash==0.17.4
+pip install dash-renderer==0.7.2
+pip install dash-html-components==0.6.0
+pip install dash-core-components==0.5.0
+pip install gunicorn==19.7.1
+pip install flask==0.12
 ```
 `For Linux User`
 ```bash
-sudo pip3 install requests
-sudo pip3 install python-firebase
-sudo pip3 install dash==0.19.0
-sudo pip3 install dash-renderer==0.11.1
-sudo pip3 install dash-html-components==0.8.0
-sudo pip3 install dash-core-components==0.13.0-rc4
-sudo pip3 install plotly --upgrade
-sudo pip3 install pandas
+sudo pip3 install plotly==2.0.10
+sudo pip3 install pandas==0.19.2
+sudo pip3 install pandas-datareader==0.3.0.post0
+sudo pip3 install dash==0.17.4
+sudo pip3 install dash-renderer==0.7.2
+sudo pip3 install dash-html-components==0.6.0
+sudo pip3 install dash-core-components==0.5.0
+sudo pip3 install gunicorn==19.7.1
+sudo pip3 install flask==0.12
 ```
