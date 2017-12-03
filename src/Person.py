@@ -9,11 +9,11 @@ class Person:
     # 자원소비
     # 임의로 정한 자원 소비식
     def consume_food(self):
-        _food_consume_quantity = self._population * 0.7
+        _food_consume_quantity = self._population * 1.3
         self._food_obj.decrements(_food_consume_quantity)
 
     def consume_water(self):
-        _water_consume_quantity = self._population * 0.6 # 임의로 정한 자원 소비식
+        _water_consume_quantity = self._population * 1.5 # 임의로 정한 자원 소비식
         self._water_obj.decrements(_water_consume_quantity)
 
     # 인구수
